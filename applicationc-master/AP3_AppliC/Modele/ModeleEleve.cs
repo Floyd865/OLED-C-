@@ -83,5 +83,30 @@ namespace AP3_AppliC.Modele
             }
             return vretour;
         }
+        public static bool AjoutEleve(string nom, string prenom, string email, string tel, string mdp, string dateNaissance)
+        {
+            Eleve unE;
+            bool vretour = true;
+            try
+            {
+                // ajout dans la table Eleve
+                unE = new Eleve();
+                unE.Nomeleve = nom;
+                unE.Prenomeleve = prenom;
+                unE.Emaileleve = email;
+                unE.NumEleve = tel;
+                unE.Motpasseeleve = mdp;
+                unE.Datenaissanceeleve = DateOnly.Parse(dateNaissance);
+
+                Modele.Connexion.MonModel.Eleves.Add(unE);
+                Modele.Connexion.MonModel.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                vretour = false;
+                MessageBox.Show(ex.Message.ToString());
+            }
+            return vretour;
+        }
     }
 }

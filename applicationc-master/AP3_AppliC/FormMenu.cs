@@ -127,7 +127,7 @@ namespace AP3_AppliC
 
         private void inscriptionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            throw new ArgumentException("Cette fonctionnalité n'est pas encore opérationnelle");
+            openChildForm(new FormListeEleves(AP3_AppliC.EtatGestion.Create));
         }
 
         private void gestionDesForfaitsToolStripMenuItem_Click(object sender, EventArgs e)

@@ -42,6 +42,22 @@ namespace AP3_AppliC
                 dgvEleves.Columns[4].HeaderText = "Date de Naissance";
                 dgvForfaits.Visible = false;
             }
+            if (etat == EtatGestion.Create) // cas etat create
+            {
+                label1.Text = "Gestion des Élèves : Ajout";
+                btnAction.Text = "AJOUTER";
+                tbNom.Clear();
+                tbPrenom.Clear();
+                tbEmail.Clear();
+                tbTel.Clear();
+                tbMdp.Clear();
+                tbDateN.Clear();
+                gbInfos.Visible = true;
+                dgvEleves.Visible = false;
+                label2.Visible = false;
+                btnAction.Visible = true;
+                dgvForfaits.Visible = false;
+            }
         }
 
         private void voirSesForfaitsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -105,6 +121,39 @@ namespace AP3_AppliC
             F.Show();
         }
 
+        private void label6_Click(object sender, EventArgs e)
+        {
 
+        }
+        private void btnAction_Click(object sender, EventArgs e)
+        {
+            if (tbNom.Text != "" && tbPrenom.Text != "" && tbEmail.Text != "" && tbTel.Text != "" && tbMdp.Text != "" && tbDateN.Text != "")
+            {
+                if (!Controleur.ValidMail(tbEmail.Text))
+                {
+                    MessageBox.Show("Erreur dans le format de l'adresse mail", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    // etat en ajout
+                    if (etat == EtatGestion.Create)
+                    {
+                        if (Modele.ModeleEleve.AjoutEleve(tbNom.Text, tbPrenom.Text, tbEmail.Text, tbTel.Text, tbMdp.Text, tbDateN.Text))
+                        {
+                            MessageBox.Show("Élève ajouté avec succès.");
+                            this.Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Erreur dans l'ajout d'un élève", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Enregistrement impossible : Il faut saisir tous les champs", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

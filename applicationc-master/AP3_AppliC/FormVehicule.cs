@@ -59,8 +59,7 @@ namespace AP3_AppliC
                 tbImmatriculation.Clear();
                 tbDesignation.Clear();
                 tbNbPlaces.Clear();
-                cbManuelle.Checked = false;
-
+                cbManuelle.Checked = true;
                 // MASQUER les éléments de consultation
                 cbVehicule.Visible = false;
                 lbDetails.Visible = false;
