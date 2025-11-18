@@ -1,10 +1,17 @@
-﻿using System;
+﻿using AP3_AppliC.Entities;
+using AP3_AppliC.Modele;
+using MySqlConnector;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Net.Mail;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows.Forms.DataVisualization.Charting;
+using BC = BCrypt.Net.BCrypt;
 
 namespace AP3_AppliC
 {
@@ -22,8 +29,14 @@ namespace AP3_AppliC
             Regex r1 = new Regex(pattern);
             return r1.IsMatch(mail);
         }
+        public static bool IsValidPassword(string password)
+        {
+            if (string.IsNullOrEmpty(password) || password.Length < 8)
+                return false;
+            string pattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':""\\|,.<>?]).{8,30}$";
 
-
+            return Regex.IsMatch(password, pattern);
+        }
         /// <summary>
         /// permet l'envoi d'un mail sur le serveur smtp mis en place pour l'AP
         /// </summary>
@@ -52,6 +65,19 @@ namespace AP3_AppliC
             {
                 Console.WriteLine("Exception caught in CreateEmail(): {0}", ex.ToString());
             }
+        }
+        
+        public static string RecupMdp(string login)
+        {
+            var admin = Connexion.MonModel.Admins
+        .FirstOrDefault(a => a.Loginadmin == login);
+
+            if (admin != null)
+            {
+                return admin.Mdpadmin;
+            }
+
+            return null;
         }
     }
 }

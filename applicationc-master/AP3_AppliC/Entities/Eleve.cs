@@ -13,11 +13,17 @@ public partial class Eleve
 
     public string Emaileleve { get; set; } = null!;
 
+    public string? NumEleve { get; set; }
+
     public string? Motpasseeleve { get; set; }
 
     public DateOnly Datenaissanceeleve { get; set; }
 
+    public int? Idforfait { get; set; }
+
     public virtual ICollection<Conduire> Conduires { get; set; } = new List<Conduire>();
+
+    public virtual Forfait? IdforfaitNavigation { get; set; }
 
     public virtual ICollection<Inscrire> Inscrires { get; set; } = new List<Inscrire>();
 

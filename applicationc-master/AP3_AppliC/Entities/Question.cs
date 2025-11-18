@@ -11,5 +11,9 @@ public partial class Question
 
     public string Imagequestion { get; set; } = null!;
 
+    public int? Idcategorie { get; set; }
+
+    public virtual Categorie? IdcategorieNavigation { get; set; }
+
     public virtual ICollection<Reponse> Reponses { get; set; } = new List<Reponse>();
 }

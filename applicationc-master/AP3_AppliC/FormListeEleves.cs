@@ -13,31 +13,35 @@ namespace AP3_AppliC
 {
     public partial class FormListeEleves : Form
     {
-        public FormListeEleves()
+        private EtatGestion etat;
+        public FormListeEleves(EtatGestion etat)
         {
             InitializeComponent();
+            this.etat = etat;
         }
 
         private void FormListeEleves_Load(object sender, EventArgs e)
         {
-            bsEleves.DataSource = Modele.ModeleEleve.listeEleves().Select(static x => new
+            if (etat == EtatGestion.Read)
             {
-                x.Ideleve,
-                x.Nomeleve,
-                x.Prenomeleve,
-                x.Emaileleve,
-                x.Datenaissanceeleve
-            }).OrderBy(x => x.Nomeleve);
+                bsEleves.DataSource = Modele.ModeleEleve.listeEleves().Select(static x => new
+                {
+                    x.Ideleve,
+                    x.Nomeleve,
+                    x.Prenomeleve,
+                    x.Emaileleve,
+                    x.Datenaissanceeleve
+                }).OrderBy(x => x.Nomeleve);
 
 
-            dgvEleves.DataSource = bsEleves;
-            dgvEleves.Columns[0].HeaderText = "Identifiant";
-            dgvEleves.Columns[1].HeaderText = "Nom";
-            dgvEleves.Columns[2].HeaderText = "Prénom";
-            dgvEleves.Columns[3].HeaderText = "Email";
-            dgvEleves.Columns[4].HeaderText = "Date de Naissance";
-            dgvForfaits.Visible = false;
-
+                dgvEleves.DataSource = bsEleves;
+                dgvEleves.Columns[0].HeaderText = "Identifiant";
+                dgvEleves.Columns[1].HeaderText = "Nom";
+                dgvEleves.Columns[2].HeaderText = "Prénom";
+                dgvEleves.Columns[3].HeaderText = "Email";
+                dgvEleves.Columns[4].HeaderText = "Date de Naissance";
+                dgvForfaits.Visible = false;
+            }
         }
 
         private void voirSesForfaitsToolStripMenuItem_Click(object sender, EventArgs e)

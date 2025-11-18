@@ -15,5 +15,7 @@ public partial class Vehicule
 
     public bool? Manuel { get; set; }
 
+    public string? CheminImage { get; set; }
+
     public virtual ICollection<Conduire> Conduires { get; set; } = new List<Conduire>();
 }

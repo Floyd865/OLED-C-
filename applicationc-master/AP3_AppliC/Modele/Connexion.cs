@@ -12,16 +12,16 @@ namespace AP3_AppliC.Modele
         /// <summary>
         /// créé l'objet de lien (le CONTEXT) avec la BD
         /// </summary>
-        private static Ap320252026Context monModel;
+        private static Ap3OledContext monModel;
 
-        public static Ap320252026Context MonModel { get => monModel; set => monModel = value; }
+        public static Ap3OledContext MonModel { get => monModel; set => monModel = value; }
 
         /// <summary>
         /// Initialisation de la connexion avec la BD (à appeler dans Program.cs)
         /// </summary>
         public static void init()
         {
-            monModel = new Ap320252026Context();
+            monModel = new Ap3OledContext();
         }
 
 

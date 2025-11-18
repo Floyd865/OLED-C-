@@ -19,5 +19,9 @@ public partial class Forfait
 
     public decimal? Prixhoraire { get; set; }
 
+    public int? Nbeleve { get; set; }
+
+    public virtual ICollection<Eleve> Eleves { get; set; } = new List<Eleve>();
+
     public virtual ICollection<Inscrire> Inscrires { get; set; } = new List<Inscrire>();
 }

@@ -1,6 +1,7 @@
 ﻿using AP3_AppliC.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,20 +10,10 @@ namespace AP3_AppliC.Modele
 {
     public static class ModeleForfait
     {
-        /// <summary>
-        /// Liste tous les forfaits
-        /// </summary>
-        /// <returns></returns>
         public static List<Forfait> listeForfaits()
         {
             return Modele.Connexion.MonModel.Forfaits.ToList();
         }
-
-        /// <summary>
-        /// Récupère l'objet FORFAIT correspondant à l'identifiant passé en paramètre
-        /// </summary>
-        /// <param name="idForfait"></param>
-        /// <returns></returns>
         public static Forfait RecupererForfait(int idForfait)
         {
             Forfait unF = new Forfait();
@@ -36,27 +27,46 @@ namespace AP3_AppliC.Modele
             }
             return unF;
         }
-        /// <summary>
-        /// Supprime un forfait dont l'identifiant est passé en paramètre
-        /// </summary>
-        /// <param name="idForfait"></param>
-        /// <returns></returns>
         public static bool SupprimerForfait(int idForfait)
         {
             bool vretour = true;
             try
             {
                 Forfait monF = RecupererForfait(idForfait);
-                Modele.Connexion.MonModel.Forfaits.Remove(monF); // correspond au DELETE
+                Modele.Connexion.MonModel.Forfaits.Remove(monF);
                 Modele.Connexion.MonModel.SaveChanges();
             }
             catch (Exception ex)
             {
-               // System.Windows.Forms.MessageBox.Show(ex.Message);
                 vretour = false;
             }
             return vretour;
         }
 
+        public static bool AjoutForfait(string nom, string description, string contenu, int prix, int heures, int? prixHoraire)
+        {
+            Forfait unF;
+            bool vretour = true;
+            try
+            {
+                unF = new Forfait();
+                unF.Libelleforfait = nom;
+                unF.Descriptionforfait = description;
+                unF.Contenuforfait = contenu;
+                unF.Prixforfait = prix;
+                unF.Nbheures = heures;
+                unF.Prixhoraire = prixHoraire;
+
+                Modele.Connexion.MonModel.Forfaits.Add(unF);
+                Modele.Connexion.MonModel.SaveChanges();
+
+            }
+            catch (Exception ex)
+            {
+                vretour = false;
+                MessageBox.Show(ex.Message.ToString());
+            }
+            return vretour;
+        }
     }
 }

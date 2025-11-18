@@ -1,0 +1,3 @@
+ebourget : $2a$11$Cu2pyObNzRCEyOVlYt0yt.4yYByK3aXNkJ1jm9bM49Q/exXXE/wYu : admin123
+
+dotnet ef dbcontext scaffold "server=192.168.10.16;port=3306;user=ap3_oled-1;password=dPzyVOIW;database=ap3_oled" Pomelo.EntityFrameworkCore.MySql -o Entities -f
